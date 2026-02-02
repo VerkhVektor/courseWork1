@@ -15,7 +15,7 @@ void main() {
     Employee employee9 = new Employee("Сотрудников Сотрудник Сотрудничеевич", (short) 5, 50500);
     Employee employee10 = new Employee("Фантазеров Конец Полнеевич", (short) 4, 45000);
     Employee employee11 = new Employee("Последний Сотрудник Чеевич", (short) 2, 105000);
-    Employee [] empArray = new Employee[]{employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8, employee9, employee10, employee11};
+    Employee[] empArray = new Employee[]{employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8, employee9, employee10, employee11};
 
     for (int i = 0; i < 11; i++) {
         book.addIfEmpty(empArray[i]);
@@ -42,7 +42,7 @@ void main() {
 
     // проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра
 
-    book.setIndexation((short)5);
+    book.setIndexation((short) 5);
 
     // Получить в качестве параметра номер отдела (1–5) и цифру зарплаты и вывести первого сотрудника этого отдела с зарплатой больше указанной вместе с порядковым номером в списке.
 
@@ -61,21 +61,10 @@ void main() {
     System.out.println(book.isInMassive(employee11));
 
 
-
     //Добавьте метод для получения сотрудника по
     //id
 
     book.printById(7);
-
-
-
-
-
-
-
-
-
-
 
 
 }
