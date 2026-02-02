@@ -64,6 +64,7 @@ public class Employee {
 
     public String printShortInfo() {
         return "Ф.И.О - " + fullName + ", зарплата - " + salary;
+
     }
 
 
