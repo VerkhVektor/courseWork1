@@ -36,7 +36,7 @@ public class EmployeeBook {
     }
 
     public void getTax(String typeTax) {
-       float [] taxes = new float[employees.length];
+        float[] taxes = new float[employees.length];
         int i = 0;
         for (Employee emp : employees) {
             if (i == 10) {
