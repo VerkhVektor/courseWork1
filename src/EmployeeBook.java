@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class EmployeeBook {
 
     private Employee[] employees;
@@ -16,7 +14,7 @@ public class EmployeeBook {
         for (Employee emp : employees) {
             if (emp != null) {
                 System.out.println(emp.toString());
-            } else break;
+            }
         }
     }
 
@@ -31,21 +29,28 @@ public class EmployeeBook {
                 totalSalary += emp.getSalary();
             }
         }
-        return totalSalary / count;
+        if (count == 0) {
+            return 0f;
+        }
+        return (float) (totalSalary / count);
 
     }
 
-    public void getTax(String typeTax) {
-       float [] taxes = new float[employees.length];
+    public float[] getTax(String typeTax) {
+        float[] taxes = new float[employees.length];
         int i = 0;
         for (Employee emp : employees) {
-            if (i == 10) {
+            if (i == 10 ) {
                 break;
+            }
+            if (emp == null) {
+                continue;
             }
             switch (typeTax) {
                 case "PROPORTIONAL":
                     taxes[i] = emp.getSalary() * 0.13f;
                     i++;
+                    break;
                 case "PROGRESSIVE":
                     if (emp.getSalary() < 150000) {
                         taxes[i] = emp.getSalary() * 0.13f;
@@ -53,25 +58,27 @@ public class EmployeeBook {
                     } else if (emp.getSalary() < 350000) {
                         taxes[i] = emp.getSalary() * 0.17f;
                         i++;
+                        break;
                     } else {
                         taxes[i] = emp.getSalary() * 0.21f;
                         i++;
+                        break;
                     }
             }
 
         }
-        System.out.println(Arrays.toString(taxes));
+        return taxes;
     }
 
 
-    public void setIndexation(short department) {
+    public void setIndexation(short department, float percent) {
         for (Employee emp : employees) {
 
             if (emp.getDepartment() != department) {
                 continue;
             } else {
                 System.out.println(emp.getSalary());
-                float index = emp.getSalary() * (1 + ((float) department) / 100);
+                float index = emp.getSalary() * (1 + percent / 100);
                 emp.setSalary((int) index);
                 System.out.println(emp.getSalary());
             }
@@ -79,25 +86,24 @@ public class EmployeeBook {
     }
 
     public void printBiggestSalary(short department, int salary) {
-        int i = 0;
-        for (Employee emp : employees) {
-            if (emp.getDepartment() == department && emp.getSalary() > salary) {
-                i++;
-                System.out.println(emp.printShortInfo() + " поряжклвый номер - " + i);
+
+        for (int j = 0; j < employees.length; j++) {
+            if (employees[j] == null) {
                 break;
-
             }
-            i++;
+            if (employees[j].getDepartment() == department && employees[j].getSalary() > salary) {
+                System.out.println(employees[j].printShortInfo() + " порядковый номер - " + j);
+                break;
+            }
         }
-
     }
 
     public void printSmalestSalary(int wage, int employeeNumber) {
         int i = 0;
         int a = 0;
-        while (true) {
-            if (a == employeeNumber) {
-                break;
+        while (a < employeeNumber || i < employees.length) {
+            if (employees[i] == null) {
+                continue;
             }
             if (employees[i].getSalary() < wage) {
                 System.out.println(employees[i].printShortInfo());
@@ -112,25 +118,25 @@ public class EmployeeBook {
 
     public boolean isInMassive(Employee emp) {
         for (Employee employee : employees) {
-            if (emp.equals(employee)) {
-                return true;
+            if (employee != null) {
+                if (emp.equals(employee)){
+                    return true;
+                }
             }
         }
         return false;
     }
 
     public boolean addIfEmpty(Employee newEmployee) {
-        int i = 0;
-        for (Employee employee : employees) {
-            if (employee == null) {
+        for (int i = 0; i < employees.length; i++) {
+            if (employees[i] == null) {
                 employees[i] = newEmployee;
                 return true;
-            } else {
-                i++;
             }
         }
         return false;
     }
+
 
     public void printById(int id) {
         for (Employee emp : employees) {
