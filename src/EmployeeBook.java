@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class EmployeeBook {
 
     private Employee[] employees;
@@ -42,8 +40,11 @@ public class EmployeeBook {
         float[] taxes = new float[employees.length];
         int i = 0;
         for (Employee emp : employees) {
-            if (i == 10 || emp == null) {
+            if (i == 10 ) {
                 break;
+            }
+            if (emp == null) {
+                continue;
             }
             switch (typeTax) {
                 case "PROPORTIONAL":
@@ -70,14 +71,14 @@ public class EmployeeBook {
     }
 
 
-    public void setIndexation(short department, float procent) {
+    public void setIndexation(short department, float percent) {
         for (Employee emp : employees) {
 
             if (emp.getDepartment() != department) {
                 continue;
             } else {
                 System.out.println(emp.getSalary());
-                float index = emp.getSalary() * (1 + procent / 100);
+                float index = emp.getSalary() * (1 + percent / 100);
                 emp.setSalary((int) index);
                 System.out.println(emp.getSalary());
             }
@@ -117,9 +118,10 @@ public class EmployeeBook {
 
     public boolean isInMassive(Employee emp) {
         for (Employee employee : employees) {
-            if (emp != null) {
-                return emp.equals(employee);
-
+            if (employee != null) {
+                if (emp.equals(employee)){
+                    return true;
+                }
             }
         }
         return false;
